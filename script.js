@@ -182,8 +182,9 @@ backSpace.addEventListener("click", () => {
     currentNumber =  calculatorScreen.value.slice(0, calculatorScreen.value.length -1);
     if (currentNumber == '') {
         currentNumber = '0';
-    } else if (prevNumber2 != '') {
+    } else if (prevNumber != '' && calculationOperator == '') {
         prevNumber = '';
+        currentNumber = '0';
     }
     printHistory(prevNumber,calculationOperator);
     updateScreen(currentNumber);
