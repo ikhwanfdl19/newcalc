@@ -1,6 +1,6 @@
-let prevNumber = ' ';
-let prevNumber2 = ' ';
-let calculationOperator = ' ';
+let prevNumber = '';
+let prevNumber2 = '';
+let calculationOperator = '';
 let currentNumber = '0';
 
 // button angka
@@ -25,11 +25,13 @@ numbers.forEach((number) => {
 
 // button operator
 const inputOperator = (operator) => {
-    if (calculationOperator === '') {
+    if (calculationOperator == '') {
         prevNumber = currentNumber;
+        calculationOperator = operator;
+        currentNumber = '0';
+    }else{
+        currentNumber = currentNumber;
     }
-    calculationOperator = operator;
-    currentNumber = '0';
 }
 
 const operators = document.querySelectorAll('.operator');
@@ -117,7 +119,7 @@ const calculate = () => {
         case '/':
             result = parseFloat(prevNumber) / parseFloat(currentNumber);
             break;
-        case '^y':
+        case '^':
             result = Math.pow(parseFloat(prevNumber), parseFloat(currentNumber));
             break;
         case 'mod':
@@ -178,13 +180,12 @@ const backSpace = document.querySelector('.clear');
 
 backSpace.addEventListener("click", () => {
     currentNumber =  calculatorScreen.value.slice(0, calculatorScreen.value.length -1);
-    if (currentNumber == ''){
+    if (currentNumber == '') {
         currentNumber = '0';
-        calculationOperator = '';
-        printHistory('',calculationOperator);
-    } else{
-        currentNumber = currentNumber;
+    } else if (prevNumber2 != '') {
+        prevNumber = '';
     }
+    printHistory(prevNumber,calculationOperator);
     updateScreen(currentNumber);
 });
 
